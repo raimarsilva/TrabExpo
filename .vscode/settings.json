@@ -1,0 +1,5 @@
+{
+    "avdmanager.sdkPath": "c:\\Users\\raima\\AppData\\Local\\Android\\Sdk",
+    "avdmanager.executable": "c:\\Users\\raima\\AppData\\Local\\Android\\Sdk\\tools\\bin\\avdmanager.bat",
+    "avdmanager.sdkManager": "c:\\Users\\raima\\AppData\\Local\\Android\\Sdk\\tools\\bin\\sdkmanager.bat"
+}
