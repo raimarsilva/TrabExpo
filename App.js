@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, TextInput } from 'react-native';
+import { NavigationContainer, Text } from '@react-navigation/native';
 import api from "./services/api";
 
 export default function App() {
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const onChangeUsernameHandler = (username) => {
     setUsername(username);
@@ -28,7 +29,8 @@ export default function App() {
       });
       
       if (response.status === 201) {
-        Alert.alert('Sucesso!', 'Usuário ' + response.data.login + ' cadastrado!');
+        Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!');
+        console.log(response.data);
         setUsername('');
         setPassword('');
       } else {
@@ -40,7 +42,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <NavigationContainer style={styles.container}>
       <Text style={styles.titleText}>Aplicativo do trabalho da disciplina de Mobile.</Text>
       <StatusBar style="auto" />
       <TextInput
@@ -56,9 +58,14 @@ export default function App() {
         onChangeText={onChangePasswordHandler} />
       <Button
         style={styles.button}
-        title="cadastrar"
+        title="Acessar"
         onPress={onSubmitHandler}/>
-    </View>
+      <Text>Não possui acesso?</Text>
+      <Button
+        title="Cadastre-se!"
+        style={styles.button}/>
+        onPress={}
+    </NavigationContainer>
   );
 }
 
@@ -73,7 +80,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     marginVertical:5,
-    marginHorizontal:5
+    marginHorizontal:5,
+    marginBottom:50
   },
   textInput: {
     borderRadius:10,
@@ -84,9 +92,11 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff'
   },
   button:{
+    flexWrap:'wrap',
     borderRadius:10,
     fontSize: 24,
     marginVertical:5,
-    marginHorizontal:5
+    marginHorizontal:5,
+    marginBottom:50
   }
 });
