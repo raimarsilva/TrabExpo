@@ -1,78 +1,31 @@
-import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, StyleSheet, TextInput } from 'react-native';
-import { NavigationContainer, Text } from '@react-navigation/native';
-import api from "./services/api";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet } from 'react-native';
+import CreateUserScreen from './views/CreateUserScreen';
+import HomeScreen from './views/HomeScreen';
+import LoginScreen from './views/LoginScreen';
 
 export default function App() {
 
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const onChangeUsernameHandler = (username) => {
-    setUsername(username);
-    console.log(username);
-  };
-
-  const onChangePasswordHandler = (password) => {
-    setPassword(password);
-    console.log(password);
-  };
-
-  const onSubmitHandler = async (event) => {
-    console.log(username,password);
-    try {
-      const response = await api.post('usuarios/criar', {
-        login:username,
-        senha:password,
-        admin:true
-      });
-      
-      if (response.status === 201) {
-        Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!');
-        console.log(response.data);
-        setUsername('');
-        setPassword('');
-      } else {
-        throw new Error();
-      }
-    } catch (error) {
-      alert("Erro de serviço.");
-    }
-  };
+  
+  
+  const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer style={styles.container}>
-      <Text style={styles.titleText}>Aplicativo do trabalho da disciplina de Mobile.</Text>
-      <StatusBar style="auto" />
-      <TextInput
-        style={styles.textInput}
-        value={username}
-        placeholder='login'
-        onChangeText={onChangeUsernameHandler} />
-      <TextInput
-        secureTextEntry
-        style={styles.textInput}
-        value={password}
-        placeholder='senha'
-        onChangeText={onChangePasswordHandler} />
-      <Button
-        style={styles.button}
-        title="Acessar"
-        onPress={onSubmitHandler}/>
-      <Text>Não possui acesso?</Text>
-      <Button
-        title="Cadastre-se!"
-        style={styles.button}/>
-        onPress={}
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name='Home' component={HomeScreen}/>
+          <Stack.Screen name='Register' component={CreateUserScreen}/>
+          <Stack.Screen name='Login' component={LoginScreen}/>
+        </Stack.Navigator>      
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#aaf',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -84,7 +37,9 @@ const styles = StyleSheet.create({
     marginBottom:50
   },
   textInput: {
-    borderRadius:10,
+    borderWidth:1,
+    placeholderTextColor:'grey',
+    borderRadius:4,
     fontSize: 24,
     marginVertical:5,
     marginHorizontal:5,
@@ -93,7 +48,7 @@ const styles = StyleSheet.create({
   },
   button:{
     flexWrap:'wrap',
-    borderRadius:10,
+    borderRadius:25,
     fontSize: 24,
     marginVertical:5,
     marginHorizontal:5,
