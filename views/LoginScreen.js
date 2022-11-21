@@ -22,7 +22,7 @@ export default function LoginScreen({navigation}) {
                 //onPress={onSubmitHandler}
             />
             <Button title="Voltar"
-            onPress={() => navigation.navigate.goBack()}></Button>
+              onPress={() => navigation.goBack()}></Button>
       </View>
 )
 }
