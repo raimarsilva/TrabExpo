@@ -24,10 +24,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.anonymous.trabexpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification96.png",
+          "color": "#ffffff",
+          "sounds": [
+            "./assets/sounds/WAV_Alarmed.wav",
+            "./assets/sounds/WAV_Beeper.wav"
+          ]
+        }
+      ]
+    ]
   }
 }

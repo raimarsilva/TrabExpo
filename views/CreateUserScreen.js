@@ -1,12 +1,47 @@
+import Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Alert, Button, Text, TextInput, View } from 'react-native';
 import api from '../services/api';
+import styles from '../styles/MainStyle';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function CreateUserScreen({navigation}) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    console.log(expoPushToken);
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
+      setNotification(notif);
+      console.log(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   const onChangeUsernameHandler = (username) => {
     setUsername(username);
@@ -39,6 +74,8 @@ export default function CreateUserScreen({navigation}) {
     } catch (error) {
       alert("Erro de serviço.");
     }
+    
+    await schedulePushNotification();
   };
 
   return (
@@ -64,36 +101,45 @@ export default function CreateUserScreen({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  titleText: {
-    fontSize: 24,
-    textAlign: 'center',
-    marginVertical:5,
-    marginHorizontal:5,
-    marginBottom:50
-  },
-  textInput: {
-    borderWidth:1,
-    placeholderTextColor:'grey',
-    borderRadius:4,
-    fontSize: 24,
-    marginVertical:5,
-    marginHorizontal:5,
-    width:'95%',
-    backgroundColor:'#fff'
-  },
-  button:{
-    flexWrap:'wrap',
-    borderRadius:25,
-    fontSize: 24,
-    marginVertical:5,
-    marginHorizontal:5,
-    marginBottom:50
+async function schedulePushNotification() {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "Usuário cadastrado!",
+      body: 'O usuário cadastrado está ativo.',
+      data: { data: 'goes here' },
+    },
+    trigger: { seconds: 3 },
+  });
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
   }
-});
+
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  return token;
+}
