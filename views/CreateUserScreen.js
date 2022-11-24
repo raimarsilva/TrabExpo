@@ -2,7 +2,7 @@ import Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, Button, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import api from '../services/api';
 import styles from '../styles/MainStyle';
 
@@ -93,10 +93,10 @@ export default function CreateUserScreen({navigation}) {
         value={password}
         placeholder='Digite uma senha'
         onChangeText={onChangePasswordHandler} />
-      <Button
+      <TouchableOpacity
         style={styles.button}
-        title="Cadastrar"
-        onPress={onSubmitHandler}/>
+        onPress={onSubmitHandler}
+        ><Text style={styles.buttonText}>Cadastrar</Text></TouchableOpacity>
     </View>
   );
 }

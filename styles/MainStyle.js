@@ -22,18 +22,29 @@ const styles = StyleSheet.create({
       placeholderTextColor:'grey',
       borderRadius:4,
       fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
+      marginVertical:10,
+      marginHorizontal:10,
       width:'95%',
-      backgroundColor:'#fff'
+      backgroundColor:'#fff',
+      height:50,
+      paddingHorizontal:5
     },
     button:{
-      flexWrap:'wrap',
+      alignContent:'stretch',
+      backgroundColor:'#1351B4',
       borderRadius:25,
-      fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
-      marginBottom:50
+      width:'60%',
+      marginVertical:10,
+      marginHorizontal:10,
+      marginBottom:50,
+      height:50
+    },
+    buttonText:{
+      color:'#fff',
+      fontSize:20,
+      textAlignVertical:'center',
+      textAlign:'center',
+      height:50
     }
   });
 
