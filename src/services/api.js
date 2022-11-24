@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const baseURL = 'https://aplicacao7.tst.jus.br/pautaws/rest'
+
 const api = axios.create({
-    baseURL: 'http://192.168.1.7:8080/api/',
+    baseURL,
 });
 
 //const gcloud = axios.create({
