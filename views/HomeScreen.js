@@ -11,8 +11,8 @@ export default function HomeScreen({navigation}){
             <Button
                 title="Cadastre-se!"
                 onPress={() => navigation.navigate('Register')}/>
-            <Text 
-                onPress={() => navigation.navigate('Login')}>Fazer login</Text>
+            <Text onPress={() => navigation.navigate('Login')}>Fazer login</Text>
+            <Text onPress={() => navigation.navigate('Suits')}>Processos</Text>
         </View>
     )
 }

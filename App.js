@@ -4,6 +4,7 @@ import { Image } from 'react-native';
 import CreateUserScreen from './views/CreateUserScreen';
 import HomeScreen from './views/HomeScreen';
 import LoginScreen from './views/LoginScreen';
+import SuitScreen from './views/SuitScreen';
 
 export default function App() {
 
@@ -21,7 +22,9 @@ export default function App() {
             options={{title:'Cadastrar novo usuário'}}/>
           <Stack.Screen name='Login'
             component={LoginScreen}/>
-          {/* <Stack.Screen name='Processos' component={SuitScreen}/> */}
+          <Stack.Screen name='Suits'
+            component={SuitScreen}
+            options={{title:'Processos'}}/>
           {/* <Stack.Screen name='Usuários' component={LawyerScreen}/> */}
         </Stack.Navigator>      
     </NavigationContainer>

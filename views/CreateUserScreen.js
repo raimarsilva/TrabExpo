@@ -1,8 +1,8 @@
-import Device from 'expo-device';
+import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import api from '../services/api';
 import styles from '../styles/MainStyle';
 
