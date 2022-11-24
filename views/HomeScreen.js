@@ -1,18 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, Text, View } from "react-native";
-import styles from "../styles/MainStyle";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import styles from '../styles/MainStyle';
+import { Text, View } from 'react-native';
 
-export default function HomeScreen({navigation}){
-    return(
-        <View style={styles.container}>
-            <StatusBar style="auto" />
-            <Text style={styles.titleText}>Aplicativo do trabalho da disciplina de Mobile.</Text>
-            <Text style={styles.plainText}>Não possui acesso?</Text>
-            <Button
-                title="Cadastre-se!"
-                onPress={() => navigation.navigate('Register')}/>
-            <Text 
-                onPress={() => navigation.navigate('Login')}>Fazer login</Text>
-        </View>
-    )
-}
+export default function HomeScreen() {
+    return (
+      <View style={styles.container}>
+        <Text>Home screen!</Text>
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
