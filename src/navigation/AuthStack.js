@@ -1,9 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Image, Button } from 'react-native';
 
-import CreateUserScreen from '../views/CreateUserScreen';
-
+import RegisterScreen from '../views/RegisterScreen';
 import LoginScreen from '../views/LoginScreen';
 
 
@@ -17,7 +15,7 @@ const AuthStack = () => {
       screenOptions={{ headerShown: false, }}>
       <Stack.Screen
         name='Register'
-        component={CreateUserScreen}
+        component={RegisterScreen}
         options={{ title: 'Cadastrar novo usuário' }} />
       <Stack.Screen
         name='Login'
