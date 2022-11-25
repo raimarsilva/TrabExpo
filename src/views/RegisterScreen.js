@@ -14,7 +14,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function CreateUserScreen({navigation}) {
+export default function RegisterScreen({navigation}) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
