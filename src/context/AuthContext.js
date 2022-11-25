@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const loadStoragedUser = async () => {
       const storagedToken = await AsyncStorage.getItem("@TrabExpo:auth");
-
       if (storagedToken) setToken(storagedToken);
     };
 
@@ -36,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem("@TrabalhoExpo:auth").then(() => {
+    await AsyncStorage.removeItem("@TrabExpo:auth").then(() => {
       setToken(null);
     });
   };
