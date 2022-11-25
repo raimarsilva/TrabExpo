@@ -6,13 +6,12 @@ export default function HomeScreen({navigation}){
     return(
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text style={styles.titleText}>Aplicativo do trabalho da disciplina de Mobile.</Text>
-            <Text style={styles.plainText}>Não possui acesso?</Text>
+            <Text>HomeScreen.</Text>
+            <Text>Não possui acesso?</Text>
             <Button
                 title="Cadastre-se!"
                 onPress={() => navigation.navigate('Register')}/>
-            <Text onPress={() => navigation.navigate('Login')}>Fazer login</Text>
-            <Text onPress={() => navigation.navigate('Suits')}>Processos</Text>
+            
         </View>
     )
 }
