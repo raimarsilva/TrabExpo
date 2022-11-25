@@ -12,18 +12,18 @@ const AuthStack = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-    
-      <Stack.Navigator initialRouteName='Login'
-        screenOptions={{headerShown: false,}}>
-          <Stack.Screen 
-            name='Register'
-            component={CreateUserScreen}
-            options={{title:'Cadastrar novo usuário'}}/>
-          <Stack.Screen 
-            name='Login' 
-            component={LoginScreen}/>
-        </Stack.Navigator>      
-    
+
+    <Stack.Navigator initialRouteName='Login'
+      screenOptions={{ headerShown: false, }}>
+      <Stack.Screen
+        name='Register'
+        component={CreateUserScreen}
+        options={{ title: 'Cadastrar novo usuário' }} />
+      <Stack.Screen
+        name='Login'
+        component={LoginScreen} />
+    </Stack.Navigator>
+
   );
 };
 
