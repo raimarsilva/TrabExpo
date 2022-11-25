@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { View } from "react-native";
 import { Button, TextInput, Text, useTheme } from "react-native-paper";
+import { Alert } from "react-native-web";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -13,10 +14,16 @@ export default function LoginScreen({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
 
   const handleSubmitLoginForm = (user, password) => {
-    setIsLoading(true);
-    login(user, password)
-      .catch((error) => console.log(error.message))
-      .finally(() => setIsLoading(false));
+    if (user == "" || password == "") {
+      alert("Preencha usuário e senha para fazer login");
+    } else if (user !== "" && password.length < 6) {
+      alert("A senha deve conter pelo menos 6 caracteres");
+    } else {
+      setIsLoading(true);
+      login(user, password)
+        .catch((error) => console.log(error.message))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return (
