@@ -89,7 +89,7 @@ export default function ScheduleScreen({ navigation }) {
                     renderItem={({item}) =>
                     <Card>
                     <Card.Content>
-                    <Title>Data:</Title>
+                    <Title>Ordem {item.id}:</Title>
                     <Paragraph>{item.data}</Paragraph>
                     </Card.Content>
             </Card>}></FlatList>
