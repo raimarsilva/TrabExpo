@@ -1,8 +1,7 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, Text, View, StyleSheet } from 'react-native';
+import { Alert, View, StyleSheet } from 'react-native';
 import { Appbar, Button, TextInput } from 'react-native-paper';
 
 import api from '../services/api';
@@ -20,7 +19,6 @@ export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [cellphone, setCellphone] = useState('');
 
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
@@ -108,13 +106,6 @@ export default function RegisterScreen({ navigation }) {
           placeholder='Repita a senha digitada acima'
           right={<TextInput.Icon icon="eye" />}
           onChangeText={onChangePasswordConfirmHandler} />
-        <TextInput
-          mode="outlined"
-          label="Celular"
-          style={styles.textInput}
-          value={cellphone}
-          placeholder='00000000000'
-          onChangeText={setCellphone}/>
         <Button
           mode="contained"
           onPress={onSubmitHandler}
