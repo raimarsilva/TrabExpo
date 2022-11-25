@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const apiSuits = axios.create({
@@ -5,11 +6,11 @@ const apiSuits = axios.create({
 });
 
 apiSuits.interceptors.request.use(
-  (config) => {
-    // TODO: get token from async storage
-    config.headers[
-      "Authorization"
-    ] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWltYXIiLCJleHAiOjE2NjkzNDAyNzZ9.YxgE3vElB_JyHe2UoEEsisRRZSKpINUYGd4o31kDSGc`;
+  async (config) => {
+    const storagedToken = await AsyncStorage.getItem("@TrabExpo:auth");
+    if (storagedToken)
+      config.headers["Authorization"] = `Bearer ${storagedToken}`;
+
     return config;
   },
   (error) => {
