@@ -1,51 +1,48 @@
-import axios from 'axios';
-import React, { createContext, useEffect, useState } from 'react';
-import api from '../services/api';
+import React, { createContext, useEffect, useState } from "react";
+import api from "../services/api";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-const BASE_URL = 'http://aplicacao7.tst.jus.br/pautaws/rest/pautas'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(null);
 
-    const [data, setData] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [token, setToken] = useState('');
+  useEffect(() => {
+    const loadStoragedUser = async () => {
+      const storagedToken = await AsyncStorage.getItem("@TrabExpo:auth");
 
-    const onSubmitHandler = async (username, password) => {
-        console.log(username, password);
-        try {
-            const response = await api.post('usuarios/auth', {
-                login: username,
-                senha: password
-            });
-
-            if (response.status === 200) {
-                //Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!',[{onPress: () => navigation.goBack()}]);
-                console.log(response.data);
-                console.log(response.token);
-                await AsyncStorage.setItem('@TrabExpo:auth', 'true');
-                setToken(response.token);
-                return response.status;
-                //navigation.navigate('Advogados');
-            } else {
-                throw new Error();
-                return response.status;
-            }
-        } catch (error) {
-            alert("usuario");
-            return error;
-        }
-        
+      if (storagedToken) setToken(storagedToken);
     };
 
+    loadStoragedUser();
+  });
 
-    return (
-        <AuthContext.Provider value={{ isLoading, onSubmitHandler, token }}>
-            {children}
-        </AuthContext.Provider>
-    );
-}
+  const login = async (username, password) => {
+    return new Promise((resolve, reject) => {
+      api
+        .post("usuarios/auth", {
+          login: username,
+          senha: password,
+        })
+        .then(async (response) => {
+          await AsyncStorage.setItem("@TrabExpo:auth", response.data.token);
+          setToken(response.data.token);
+
+          resolve(response);
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
+  const logout = async () => {
+    await AsyncStorage.removeItem("@TrabalhoExpo:auth");
+    setToken(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ login, token, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
