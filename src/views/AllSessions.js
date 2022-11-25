@@ -1,18 +1,12 @@
 import React, {  useContext, useEffect, useState } from 'react';
-import { View, Text,SafeAreaView,StyleSheet, FlatList,Item } from 'react-native';
+import { View, Text } from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import { Appbar } from 'react-native-paper';
 
 const AllSessions = () => {
     const {getList, data} = useContext(AuthContext);
 
-    
-
-    useEffect(() => {
-        
-      }, []);
-    
-
+    useEffect(() => {}, []);
     
     return(
         <View>
