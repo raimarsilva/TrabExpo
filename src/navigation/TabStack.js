@@ -8,7 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
-function TabStack() {
+function TabStack({navigation}) {
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({

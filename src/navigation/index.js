@@ -11,7 +11,7 @@ export default function(){
     
     return(
         <NavigationContainer>
-            {true? <TabStack/> : <AuthStack/>}
+            {false ? <TabStack/> : <AuthStack/>}
         </NavigationContainer>
         
     )

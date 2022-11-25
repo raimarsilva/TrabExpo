@@ -10,7 +10,29 @@ export const AuthProvider = ({children}) => {
 
     const [data, setData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    
+    const [token, setToken] = useState('');
+
+    const onSubmitHandler = async (username,password) => {
+    console.log(username,password);
+    try {
+      const response = await api.post('usuarios/auth', {
+        login:username,
+        senha:password
+      });
+      
+      if (response.status === 200) {
+        //Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!',[{onPress: () => navigation.goBack()}]);
+        console.log(response.data);
+        console.log(response.token);
+        setToken(response.token);
+        //navigation.navigate('Advogados');
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      alert("Erro de serviço.");
+    }
+  };
     
     const getList = async () => {
         setIsLoading(true)
@@ -32,7 +54,7 @@ export const AuthProvider = ({children}) => {
         
 
     return (
-        <AuthContext.Provider value={{  isLoading, getList, data}}>
+        <AuthContext.Provider value={{isLoading, onSubmitHandler, token}}>
             {children}
         </AuthContext.Provider>
     );
