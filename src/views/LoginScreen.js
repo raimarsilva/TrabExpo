@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import { View } from "react-native";
+import { View, Image, Dimensions } from "react-native";
 import { Button, TextInput, Text, useTheme } from "react-native-paper";
-import { Alert } from "react-native-web";
 
 import { AuthContext } from "../context/AuthContext";
 
@@ -12,6 +11,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
+  const windowWidth = Dimensions.get("window").width;
 
   const handleSubmitLoginForm = (user, password) => {
     if (user == "" || password == "") {
@@ -37,9 +37,25 @@ export default function LoginScreen({ navigation }) {
     >
       <View
         style={{
+          width: windowWidth,
+          backgroundColor: theme.colors.primary,
+          borderBottomLeftRadius: 150,
+          marginLeft: -32,
+          flexShrink: 1,
+          flexGrow: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={require("../assets/logo-tst-white.png")} />
+      </View>
+      <View
+        style={{
           justifyContent: "space-between",
           flex: 1,
           paddingVertical: 32,
+          flexShrink: 0,
+          flexGrow: 2,
         }}
       >
         <View style={{ marginTop: "auto", marginBottom: 16 }}>
