@@ -36,8 +36,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await AsyncStorage.removeItem("@TrabalhoExpo:auth");
-    setToken(null);
+    await AsyncStorage.removeItem("@TrabalhoExpo:auth").then(() => {
+      setToken(null);
+    });
   };
 
   return (
