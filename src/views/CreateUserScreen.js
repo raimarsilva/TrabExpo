@@ -74,8 +74,6 @@ export default function CreateUserScreen({navigation}) {
     } catch (error) {
       alert("Erro de serviço.");
     }
-    
-    
   };
 
   return (
@@ -137,8 +135,6 @@ async function registerForPushNotificationsAsync() {
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token);
-  } else {
-    alert('Must use physical device for Push Notifications');
   }
 
   return token;

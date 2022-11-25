@@ -1,62 +1,42 @@
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Button, Text, TextInput, View } from "react-native";
+import styles from "../styles/MainStyle";
+
+import {AuthContext} from '../context/AuthContext';
 
 export default function LoginScreen({navigation}) {
+
+  const {onSubmitHandler, token} = useContext(AuthContext);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  function onSubmit(username,password){
+    onSubmitHandler(username,password)
+  }
+
     return (
-        <View>
+        <View style={styles.container}>
+          <Text style={styles.titleText}>Login</Text>
             <TextInput
                 style={styles.textInput}
-                //value={username}
+                value={username}
                 placeholder='Digite seu nome de usuário'
-                //onChangeText={onChangeUsernameHandler}
             />
             <TextInput
                 secureTextEntry
                 style={styles.textInput}
-                //value={password}
+                value={password}
                 placeholder='Digite sua senha'
-                //onChangeText={onChangePasswordHandler}
             />
             <Button
                 style={styles.button}
                 title="Acessar"
-                //onPress={onSubmitHandler}
+                onPress={onSubmit}
             />
-            <Button title="Voltar"
-              onPress={() => navigation.goBack()}></Button>
+            <Text style={{marginTop:100,fontSize:18}}>Não possui acesso?</Text>
+            <Button title="Criar novo acesso"
+              onPress={() => navigation.navigate('Register')}></Button>
       </View>
 )
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    titleText: {
-      fontSize: 24,
-      textAlign: 'center',
-      marginVertical:5,
-      marginHorizontal:5,
-      marginBottom:50
-    },
-    textInput: {
-      borderWidth:1,
-      placeholderTextColor:'grey',
-      borderRadius:4,
-      fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
-      width:'95%',
-      backgroundColor:'#fff'
-    },
-    button:{
-      flexWrap:'wrap',
-      borderRadius:25,
-      fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
-      marginBottom:50
-    }
-  });
