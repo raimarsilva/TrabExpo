@@ -1,62 +1,70 @@
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Appbar, Button, TextInput } from 'react-native-paper';
 
-export default function LoginScreen({navigation}) {
-    return (
-        <View>
-            <TextInput
-                style={styles.textInput}
-                //value={username}
-                placeholder='Digite seu nome de usuário'
-                //onChangeText={onChangeUsernameHandler}
-            />
-            <TextInput
-                secureTextEntry
-                style={styles.textInput}
-                //value={password}
-                placeholder='Digite sua senha'
-                //onChangeText={onChangePasswordHandler}
-            />
-            <Button
-                style={styles.button}
-                title="Acessar"
-                //onPress={onSubmitHandler}
-            />
-            <Button title="Voltar"
-              onPress={() => navigation.goBack()}></Button>
+export default function LoginScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1 }}>
+      <Appbar.Header
+        mode="center-aligned">
+        <Appbar.Content title="Autenticação" />
+      </Appbar.Header>
+      <View style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <TextInput
+            //value={username}
+            mode="outlined"
+            label="Usuário"
+            placeholder="Seu nome de usuário"
+            style={styles.textInput}
+          //onChangeText={onChangeUsernameHandler}
+          />
+          <TextInput
+            secureTextEntry
+            //value={password}
+            mode="outlined"
+            label='Senha'
+            placeholder='Senha de 6 ou mais dígitos'
+            right={<TextInput.Icon icon="eye" />}
+            style={styles.textInput}
+          //onChangeText={onChangePasswordHandler}
+          />
+          <Button
+            mode="contained"
+          //onPress={onSubmitHandler}
+          style={styles.button}>
+            Login
+          </Button>
+          <Button
+            mode="text"
+          //onPress={onSubmitHandler}
+            style={styles.button}>
+            Esqueci minha senha
+          </Button>
+          <Button
+            mode="outlined"
+            onPress={() => navigation.navigate('Register')}
+            style={styles.button}>
+            Cadastrar  
+          </Button>
+        </View>
       </View>
-)
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    titleText: {
-      fontSize: 24,
-      textAlign: 'center',
-      marginVertical:5,
-      marginHorizontal:5,
-      marginBottom:50
-    },
-    textInput: {
-      borderWidth:1,
-      placeholderTextColor:'grey',
-      borderRadius:4,
-      fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
-      width:'95%',
-      backgroundColor:'#fff'
-    },
-    button:{
-      flexWrap:'wrap',
-      borderRadius:25,
-      fontSize: 24,
-      marginVertical:5,
-      marginHorizontal:5,
-      marginBottom:50
-    }
-  });
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 64,
+  },
+  textInput: {
+  },
+  button: {
+    marginTop: 8,
+    marginHorizontal: 16,
+  }
+});
