@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
           senha: password,
         })
         .then(async (response) => {
-          console.log(response.data);
           await AsyncStorage.setItem("@TrabExpo:auth", response.data.token);
           setToken(response.data.token);
 
@@ -36,8 +35,13 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const logout = async () => {
+    await AsyncStorage.removeItem("@TrabalhoExpo:auth");
+    setToken(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ login, token }}>
+    <AuthContext.Provider value={{ login, token, logout }}>
       {children}
     </AuthContext.Provider>
   );
