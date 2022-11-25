@@ -8,6 +8,7 @@ import ScheduleScreen from '../views/ScheduleScreen';
 import SuitScreen from '../views/SuitScreen'
 import { Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
+import RegisterScheduleScreen from '../views/RegisterScheduleScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,7 @@ function AddStack() {
       }}>
       <Stack.Screen name="TabStack" component={TabStack} />
       <Stack.Screen name="SuitScreen" component={SuitScreen} />
+      <Stack.Screen name="RegisterScheduleScreen" component={RegisterScheduleScreen} />
     </Stack.Navigator>
   );
 }
