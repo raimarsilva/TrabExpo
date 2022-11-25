@@ -11,7 +11,7 @@ const AuthStack = () => {
 
   return (
     
-      <Stack.Navigator initialRouteName='Login'
+      <Stack.Navigator initialRouteName='Register'
         screenOptions={{headerShown: false,}}>
           <Stack.Screen 
             name='Register'
