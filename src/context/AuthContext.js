@@ -35,8 +35,13 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const logout = async () => {
+    await AsyncStorage.removeItem("@TrabalhoExpo:auth");
+    setToken(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ login, token }}>
+    <AuthContext.Provider value={{ login, token, logout }}>
       {children}
     </AuthContext.Provider>
   );
