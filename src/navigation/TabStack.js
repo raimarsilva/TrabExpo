@@ -1,11 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../views/HomeScreen';
 import AllSessions from '../views/AllSessions';
-import SuitScreen from '../views/SuitScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ScheduleScreen from '../views/ScheduleScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +16,7 @@ function TabStack({navigation}) {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Advogados') {
+            if (route.name === 'Pautas') {
               iconName = focused
                 ? 'ios-people-circle'
                 : 'ios-people-circle-outline';
@@ -32,7 +31,7 @@ function TabStack({navigation}) {
           tabBarInactiveTintColor: 'gray',
         })}
       >  
-        <Tab.Screen name="Advogados" component={HomeScreen} />
+        <Tab.Screen name="Pautas" component={ScheduleScreen} />
         <Tab.Screen name="Processos" component={AllSessions} />        
       </Tab.Navigator>
     );
