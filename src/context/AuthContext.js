@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {createContext, useEffect, useState} from 'react';
 import api from '../services/api';
 
-const BASE_URL = 'https://aplicacao7.tst.jus.br/pautaws/rest/pautas'
+const BASE_URL = 'http://aplicacao7.tst.jus.br/pautaws/rest/pautas'
 
 export const AuthContext = createContext();
 
@@ -14,12 +14,13 @@ export const AuthProvider = ({children}) => {
     
     const getList = async () => {
         setIsLoading(true)
-        axios
-        .get('https://aplicacao7.tst.jus.br/pautaws/rest/pautas')
-        .then((res) => {let info = res;
-        console.log(info)
-        setData(info);
-        setIsLoading(false);
+        await axios
+        .get('http://192.168.0.96//aplicacao7.tst.jus.br/pautaws/rest/pautas')
+        .then((response) => {
+            let info = response[0];
+            console.log(info)
+            setData(info);
+            setIsLoading(false);
         })
         .catch(error => {
         console.log(`register error ${error}`);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://aplicacao7.tst.jus.br/pautaws/rest'
+const baseURL = 'http://aplicacao7.tst.jus.br/pautaws/rest/pautas'
 
 const api = axios.create({
     baseURL,
