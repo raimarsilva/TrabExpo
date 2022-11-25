@@ -1,5 +1,5 @@
 import { Card, Title, Paragraph, IconButton, Button } from 'react-native-paper';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 
 export default function HomeScreen({ navigation }) {
