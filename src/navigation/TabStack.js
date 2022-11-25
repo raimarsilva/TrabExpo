@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../views/HomeScreen';
 import AllSessions from '../views/AllSessions';
+import SuitScreen from '../views/SuitScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

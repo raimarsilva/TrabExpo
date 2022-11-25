@@ -1,7 +1,18 @@
 import { View, StyleSheet } from "react-native";
 import { Appbar, Button, TextInput } from 'react-native-paper';
 
+import {AuthContext} from '../context/AuthContext';
+
 export default function LoginScreen({ navigation }) {
+  const {onSubmitHandler} = useContext(AuthContext);
+
+  function onSubmit(user, password){
+    const res = onSubmitHandler(user, password);
+    if (res != 200){
+      alert("usuário ou senha inválido")
+    }
+  }
+  
   return (
     <View style={{ flex: 1 }}>
       <Appbar.Header
@@ -30,8 +41,8 @@ export default function LoginScreen({ navigation }) {
           />
           <Button
             mode="contained"
-          //onPress={onSubmitHandler}
-          style={styles.button}>
+            onPress={onSubmit}
+            style={styles.button}>
             Login
           </Button>
           <Button
