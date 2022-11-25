@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
         })
         .then(async (response) => {
           console.log(response.data);
-          await AsyncStorage.setItem("@TrabExpo:auth", response.token);
-          setToken(response.token);
+          await AsyncStorage.setItem("@TrabExpo:auth", response.data.token);
+          setToken(response.data.token);
 
           resolve(response);
         })
