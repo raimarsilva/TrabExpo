@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWltYXIiLCJleHAiOjE2NjkzNDAyNzZ9.YxgE3vElB_JyHe2UoEEsisRRZSKpINUYGd4o31kDSGc";
+
 const apiSuits = axios.create({
-    baseURL: 'https://aplicacao7.tst.jus.br/pautaws/rest/processospauta/tst?sessao=405-2022-6-O'
+    baseURL: 'http://192.168.1.7:8080/api',
+    headers: {'Authorization': 'Bearer '+token}
 });
 
 export default apiSuits;

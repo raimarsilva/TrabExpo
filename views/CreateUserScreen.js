@@ -63,11 +63,11 @@ export default function CreateUserScreen({navigation}) {
       });
       
       if (response.status === 201) {
-        Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!');
+        Alert.alert('Sucesso!', 'Usuário \"' + response.data.login + '\" cadastrado!',[{onPress: () => navigation.goBack()}]);
         console.log(response.data);
         setUsername('');
         setPassword('');
-
+        await schedulePushNotification();
       } else {
         throw new Error();
       }
@@ -75,7 +75,7 @@ export default function CreateUserScreen({navigation}) {
       alert("Erro de serviço.");
     }
     
-    await schedulePushNotification();
+    
   };
 
   return (
@@ -108,7 +108,7 @@ async function schedulePushNotification() {
       body: 'O usuário cadastrado está ativo.',
       data: { data: 'goes here' },
     },
-    trigger: { seconds: 3 },
+    trigger: { seconds: 5 },
   });
 }
 
